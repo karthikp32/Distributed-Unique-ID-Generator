@@ -2,16 +2,23 @@ package main
 
 import (
 	// "encoding/json"
-	"log"
 	"encoding/json"
+	"log"
 	"math/rand"
+	"slices"
+
 	maelstrom "github.com/jepsen-io/maelstrom/demo/go"
 )
 
 var backupUniqueId = -1
+var generatedIds []int
 
 func generateUniqueId() int {
 	backupUniqueId = rand.Intn(1000000)
+	for !slices.Contains(generatedIds, backupUniqueId) {
+
+	}
+	generatedIds = append(generatedIds, backupUniqueId)
 	return backupUniqueId
 }
 
