@@ -2,11 +2,9 @@ package main
 
 import (
 	// "encoding/json"
-	// "log"
+	"log"
 	"encoding/json"
-	"fmt"
 	"math/rand"
-
 	maelstrom "github.com/jepsen-io/maelstrom/demo/go"
 )
 
@@ -25,7 +23,7 @@ func main() {
 
 	n := maelstrom.NewNode()
 
-	n.Handle("unique-ids", func(msg maelstrom.Message) error {
+	n.Handle("generate", func(msg maelstrom.Message) error {
 		var requestBody map[string]any
 	
 		if err := json.Unmarshal(msg.Body, &requestBody); err != nil {
@@ -37,5 +35,9 @@ func main() {
 
 		return n.Reply(msg, requestBody)
 	})
+
+	if err := n.Run(); err != nil {
+		log.Fatal(err)
+	}
 
 }
