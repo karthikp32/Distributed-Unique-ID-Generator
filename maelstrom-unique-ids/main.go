@@ -15,8 +15,8 @@ var generatedIds []int
 
 func generateUniqueId() int {
 	backupUniqueId = rand.Intn(1000000)
-	for !slices.Contains(generatedIds, backupUniqueId) {
-
+	for slices.Contains(generatedIds, backupUniqueId) {
+		backupUniqueId = rand.Intn(1000000)
 	}
 	generatedIds = append(generatedIds, backupUniqueId)
 	return backupUniqueId

@@ -1,0 +1,9 @@
+2024/02/08 21:15:56 Received {c2 n2 {"type":"init","node_id":"n2","node_ids":["n0","n1","n2"],"msg_id":1}}
+2024/02/08 21:15:56 Node n2 initialized
+2024/02/08 21:15:56 Sent {"src":"n2","dest":"c2","body":{"in_reply_to":1,"type":"init_ok"}}
+2024/02/08 21:15:56 Received {c7 n2 {"type":"generate","msg_id":1}}
+2024/02/08 21:16:01 Received {c7 n2 {"type":"generate","msg_id":2}}
+2024/02/08 21:16:06 Received {c7 n2 {"type":"generate","msg_id":3}}
+2024/02/08 21:16:11 Received {c7 n2 {"type":"generate","msg_id":4}}
+2024/02/08 21:16:16 Received {c7 n2 {"type":"generate","msg_id":5}}
+2024/02/08 21:16:21 Received {c7 n2 {"type":"generate","msg_id":6}}
