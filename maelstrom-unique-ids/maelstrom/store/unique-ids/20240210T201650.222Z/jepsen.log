@@ -1,0 +1,268 @@
+2024-02-10 20:16:50,307{GMT}	INFO	[jepsen test runner] jepsen.core: Test version 1431cb4760a96788775614bccb99f7b62f06cf0d (plus uncommitted changes)
+2024-02-10 20:16:50,308{GMT}	INFO	[jepsen test runner] jepsen.core: Command line:
+lein run test -w unique-ids --bin /go/bin/maelstrom-unique-ids --time-limit 30 --rate 1000 --node-count 3 --availability total --nemesis partition
+2024-02-10 20:16:50,413{GMT}	INFO	[jepsen test runner] jepsen.core: Running test:
+{:args []
+ :remote
+ #jepsen.control.retry.Remote{:remote #jepsen.control.scp.Remote{:cmd-remote #jepsen.control.sshj.SSHJRemote{:concurrency-limit 6,
+                                                                                                             :conn-spec nil,
+                                                                                                             :client nil,
+                                                                                                             :semaphore nil},
+                                                                 :conn-spec nil},
+                              :conn nil}
+ :log-net-send false
+ :node-count 3
+ :availability :total
+ :max-txn-length 4
+ :concurrency 3
+ :db
+ #object[maelstrom.db$db$reify__16142
+         "0x7934164c"
+         "maelstrom.db$db$reify__16142@7934164c"]
+ :max-writes-per-key 16
+ :leave-db-running? false
+ :name "unique-ids"
+ :logging-json? false
+ :start-time
+ #object[org.joda.time.DateTime "0x3014c46f" "2024-02-10T20:16:50.222Z"]
+ :nemesis-interval 10
+ :net
+ #object[maelstrom.net$jepsen_net$reify__15251
+         "0x6abd88fe"
+         "maelstrom.net$jepsen_net$reify__15251@6abd88fe"]
+ :client
+ #object[maelstrom.workload.unique_ids$client$reify__20074
+         "0x16337c8e"
+         "maelstrom.workload.unique_ids$client$reify__20074@16337c8e"]
+ :barrier
+ #object[java.util.concurrent.CyclicBarrier
+         "0x2603a76d"
+         "java.util.concurrent.CyclicBarrier@2603a76d"]
+ :log-stderr false
+ :pure-generators true
+ :ssh {:dummy? true}
+ :rate 1000.0
+ :checker
+ #object[jepsen.checker$compose$reify__11881
+         "0x3022287e"
+         "jepsen.checker$compose$reify__11881@3022287e"]
+ :argv
+ ("test"
+  "-w"
+  "unique-ids"
+  "--bin"
+  "/go/bin/maelstrom-unique-ids"
+  "--time-limit"
+  "30"
+  "--rate"
+  "1000"
+  "--node-count"
+  "3"
+  "--availability"
+  "total"
+  "--nemesis"
+  "partition")
+ :nemesis
+ (jepsen.nemesis.ReflCompose
+  {:fm {:start-partition 0,
+        :stop-partition 0,
+        :kill 1,
+        :start 1,
+        :pause 1,
+        :resume 1},
+   :nemeses [#unprintable "jepsen.nemesis.combined$partition_nemesis$reify__16416@36deacfc"
+             #unprintable "jepsen.nemesis.combined$db_nemesis$reify__16397@3b0471a5"]})
+ :nodes ["n0" "n1" "n2"]
+ :test-count 1
+ :latency {:mean 0, :dist :constant}
+ :bin "/go/bin/maelstrom-unique-ids"
+ :generator
+ (jepsen.generator.TimeLimit
+  {:limit 30000000000,
+   :cutoff nil,
+   :gen (jepsen.generator.Any
+         {:gens [(jepsen.generator.OnThreads
+                  {:f #{:nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x3c634a04"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@3c634a04"],
+                   :gen (jepsen.generator.Stagger
+                         {:dt 20000000000,
+                          :next-time nil,
+                          :gen (jepsen.generator.FlipFlop
+                                {:gens [#object[jepsen.nemesis.combined$partition_package$start__16420
+                                                "0x4b48be5c"
+                                                "jepsen.nemesis.combined$partition_package$start__16420@4b48be5c"]
+                                        ({:type :info,
+                                          :f :stop-partition,
+                                          :value nil}
+                                         {:type :info,
+                                          :f :stop-partition,
+                                          :value nil}
+                                         {:type :info,
+                                          :f :stop-partition,
+                                          :value nil}
+                                         {:type :info,
+                                          :f :stop-partition,
+                                          :value nil}
+                                         {:type :info,
+                                          :f :stop-partition,
+                                          :value nil}
+                                         {:type :info,
+                                          :f :stop-partition,
+                                          :value nil}
+                                         {:type :info,
+                                          :f :stop-partition,
+                                          :value nil}
+                                         {:type :info,
+                                          :f :stop-partition,
+                                          :value nil}
+                                         ...)],
+                                 :i 0})})})
+                 (jepsen.generator.OnThreads
+                  {:f #jepsen.generator.context.AllBut{:element :nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x36573ec5"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@36573ec5"],
+                   :gen (jepsen.generator.Stagger
+                         {:dt 2000000,
+                          :next-time nil,
+                          :gen (jepsen.generator.Repeat
+                                {:remaining -1, :gen {:f :generate}})})})]})})
+ :log-net-recv false
+ :os
+ #object[maelstrom.net$jepsen_os$reify__15254
+         "0x10c26161"
+         "maelstrom.net$jepsen_os$reify__15254@10c26161"]
+ :time-limit 30
+ :workload :unique-ids
+ :consistency-models [:strict-serializable]
+ :topology :grid}
+
+2024-02-10 20:16:52,736{GMT}	INFO	[jepsen node n0] maelstrom.net: Starting Maelstrom network
+2024-02-10 20:16:52,739{GMT}	INFO	[jepsen test runner] jepsen.db: Tearing down DB
+2024-02-10 20:16:52,742{GMT}	INFO	[jepsen test runner] jepsen.db: Setting up DB
+2024-02-10 20:16:52,747{GMT}	INFO	[jepsen node n0] maelstrom.service: Starting services: (lin-kv lin-tso lww-kv seq-kv)
+2024-02-10 20:16:52,749{GMT}	INFO	[jepsen node n1] maelstrom.db: Setting up n1
+2024-02-10 20:16:52,750{GMT}	INFO	[jepsen node n1] maelstrom.process: launching /go/bin/maelstrom-unique-ids []
+2024-02-10 20:16:52,750{GMT}	INFO	[jepsen node n2] maelstrom.db: Setting up n2
+2024-02-10 20:16:52,751{GMT}	INFO	[jepsen node n2] maelstrom.process: launching /go/bin/maelstrom-unique-ids []
+2024-02-10 20:16:52,755{GMT}	INFO	[jepsen node n0] maelstrom.db: Setting up n0
+2024-02-10 20:16:52,756{GMT}	INFO	[jepsen node n0] maelstrom.process: launching /go/bin/maelstrom-unique-ids []
+2024-02-10 20:16:52,790{GMT}	WARN	[n0 stdout] maelstrom.process: Error!
+clojure.lang.ExceptionInfo: Malformed network message. Node n0 tried to send the following message via STDOUT:
+
+{:currNodeId "n0", :body {}}
+
+This is malformed because:
+
+{:src missing-required-key,
+ :dest missing-required-key,
+ :currNodeId disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.process$parse_msg.invokeStatic(process.clj:57)
+	at maelstrom.process$parse_msg.invoke(process.clj:35)
+	at maelstrom.process$stdout_thread$fn__15878$fn__15879$fn__15881.invoke(process.clj:146)
+	at maelstrom.process$stdout_thread$fn__15878$fn__15879.invoke(process.clj:146)
+	at maelstrom.process$stdout_thread$fn__15878.invoke(process.clj:140)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-10 20:16:52,827{GMT}	WARN	[n2 stdout] maelstrom.process: Error!
+clojure.lang.ExceptionInfo: Malformed network message. Node n2 tried to send the following message via STDOUT:
+
+{:currNodeId "n2", :body {}}
+
+This is malformed because:
+
+{:src missing-required-key,
+ :dest missing-required-key,
+ :currNodeId disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.process$parse_msg.invokeStatic(process.clj:57)
+	at maelstrom.process$parse_msg.invoke(process.clj:35)
+	at maelstrom.process$stdout_thread$fn__15878$fn__15879$fn__15881.invoke(process.clj:146)
+	at maelstrom.process$stdout_thread$fn__15878$fn__15879.invoke(process.clj:146)
+	at maelstrom.process$stdout_thread$fn__15878.invoke(process.clj:140)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-10 20:16:52,865{GMT}	WARN	[n1 stdout] maelstrom.process: Error!
+clojure.lang.ExceptionInfo: Malformed network message. Node n1 tried to send the following message via STDOUT:
+
+{:currNodeId "n1", :body {}}
+
+This is malformed because:
+
+{:src missing-required-key,
+ :dest missing-required-key,
+ :currNodeId disallowed-key}
+
+See doc/protocol.md for more guidance.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.process$parse_msg.invokeStatic(process.clj:57)
+	at maelstrom.process$parse_msg.invoke(process.clj:35)
+	at maelstrom.process$stdout_thread$fn__15878$fn__15879$fn__15881.invoke(process.clj:146)
+	at maelstrom.process$stdout_thread$fn__15878$fn__15879.invoke(process.clj:146)
+	at maelstrom.process$stdout_thread$fn__15878.invoke(process.clj:140)
+	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+	at clojure.lang.AFn.call(AFn.java:18)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-10 20:17:02,781{GMT}	INFO	[jepsen node n2] maelstrom.db: Tearing down n2
+2024-02-10 20:17:02,784{GMT}	INFO	[jepsen node n0] maelstrom.db: Tearing down n0
+2024-02-10 20:17:02,797{GMT}	INFO	[jepsen node n1] maelstrom.db: Tearing down n1
+2024-02-10 20:17:04,773{GMT}	INFO	[jepsen node n0] maelstrom.net: Shutting down Maelstrom network
+2024-02-10 20:17:04,776{GMT}	WARN	[jepsen test runner] jepsen.core: Test crashed!
+clojure.lang.ExceptionInfo: Expected node n0 to respond to an init message, but node did not respond.
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.db$db$reify__16142.setup_BANG_(db.clj:63)
+	at jepsen.db$fn__8729$G__8723__8733.invoke(db.clj:12)
+	at jepsen.db$fn__8729$G__8722__8738.invoke(db.clj:12)
+	at clojure.core$partial$fn__5908.invoke(core.clj:2642)
+	at jepsen.control$on_nodes$fn__8599.invoke(control.clj:314)
+	at clojure.lang.AFn.applyToHelper(AFn.java:154)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:667)
+	at clojure.core$with_bindings_STAR_.invokeStatic(core.clj:1990)
+	at clojure.core$with_bindings_STAR_.doInvoke(core.clj:1990)
+	at clojure.lang.RestFn.applyTo(RestFn.java:142)
+	at clojure.core$apply.invokeStatic(core.clj:671)
+	at clojure.core$bound_fn_STAR_$fn__5818.doInvoke(core.clj:2020)
+	at clojure.lang.RestFn.invoke(RestFn.java:408)
+	at dom_top.core$real_pmap_helper$build_thread__211$fn__212.invoke(core.clj:163)
+	at clojure.lang.AFn.applyToHelper(AFn.java:152)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:667)
+	at clojure.core$with_bindings_STAR_.invokeStatic(core.clj:1990)
+	at clojure.core$with_bindings_STAR_.doInvoke(core.clj:1990)
+	at clojure.lang.RestFn.invoke(RestFn.java:425)
+	at clojure.lang.AFn.applyToHelper(AFn.java:156)
+	at clojure.lang.RestFn.applyTo(RestFn.java:132)
+	at clojure.core$apply.invokeStatic(core.clj:671)
+	at clojure.core$bound_fn_STAR_$fn__5818.doInvoke(core.clj:2020)
+	at clojure.lang.RestFn.invoke(RestFn.java:397)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: clojure.lang.ExceptionInfo: Client read timeout
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.client$recv_BANG_.invokeStatic(client.clj:98)
+	at maelstrom.client$recv_BANG_.invoke(client.clj:81)
+	at maelstrom.client$send_PLUS_recv_BANG_.invokeStatic(client.clj:123)
+	at maelstrom.client$send_PLUS_recv_BANG_.invoke(client.clj:119)
+	at maelstrom.client$rpc_BANG_.invokeStatic(client.clj:149)
+	at maelstrom.client$rpc_BANG_.invoke(client.clj:140)
+	at maelstrom.db$db$reify__16142.setup_BANG_(db.clj:48)
+	... 27 common frames omitted
