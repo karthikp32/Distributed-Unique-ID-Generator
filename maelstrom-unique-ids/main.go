@@ -3,7 +3,6 @@ package main
 import (
 	// "encoding/json"
 	"encoding/json"
-	// "fmt"
 	"log"
 	"math/rand"
 	"slices"
@@ -13,8 +12,6 @@ import (
 
 var backupUniqueId = -1
 var generatedIds []int
-var currNodeId any
-var node_ids any
 
 func generateUniqueId() int {
 	backupUniqueId = rand.Intn(1000000)
@@ -27,42 +24,15 @@ func generateUniqueId() int {
 
 
 func main() {
-
-	//Algorithm 1:
-	//Sender calculates "node_ids" and "node_id" by calling n.NodeIds() and n.ID()
-	//and set otherNodes slice = "node_ids"-"node_id" 
-	//Sender generates a unique id
-	//send a message body of type "share", msg_id of node_id number + uniqueIdShared, new_id of the newly generated unique id
-	//Receiver has a message handler that listen for messages of type "share"
-	//and deconstructs the message for the property "new_id"
-	//add the value mapped to "new_id" to its generatedIds slice
+	// for i:=1; i <= 10; i++ {
+	// 	fmt.Println(generateUniqueId())
+	// }
 
 	n := maelstrom.NewNode()
 
-
-	n.Handle("init", func(msg maelstrom.Message) error {
-		var requestBody map[string]any
-	
-		if err := json.Unmarshal(msg.Body, &requestBody); err != nil {
-			return err
-		}	
-
-		currNodeId = requestBody["node_id"]
-
-		// a, _ := json.Marshal(map[string]any{"currNodeId": currNodeId})
-		// fmt.Println(string(a)) // {"bar":2,"baz":3,"foo":1}
-
-
-		requestBody["type"] = "init_ok"
-		requestBody["in_reply_to"] = requestBody["msg_id"]
-
-		return n.Reply(msg, requestBody)
-	})
-
-
 	n.Handle("generate", func(msg maelstrom.Message) error {
 		var requestBody map[string]any
-
+	
 		if err := json.Unmarshal(msg.Body, &requestBody); err != nil {
 			return err
 		}	
