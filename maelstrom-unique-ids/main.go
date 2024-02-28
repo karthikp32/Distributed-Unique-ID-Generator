@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"math/rand"
+	"math"
 	"slices"
 
 	maelstrom "github.com/jepsen-io/maelstrom/demo/go"
@@ -14,9 +15,9 @@ var backupUniqueId = -1
 var generatedIds []int
 
 func generateUniqueId() int {
-	backupUniqueId = rand.Intn(1000000)
+	backupUniqueId = rand.Intn(math.MaxInt)
 	for slices.Contains(generatedIds, backupUniqueId) {
-		backupUniqueId = rand.Intn(1000000)
+		backupUniqueId = rand.Intn(math.MaxInt64)
 	}
 	generatedIds = append(generatedIds, backupUniqueId)
 	return backupUniqueId
